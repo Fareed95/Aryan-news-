@@ -17,8 +17,12 @@ def HomePage(request):
         featured_article = News_Article.objects.get(article_subcategory='HOME_MAIN_PAGE_DISPLAY')
     except News_Article.DoesNotExist:
         featured_article = None  # Handle case where article is not found
+    try:
+        section_new1_page = News_Article.objects.get(article_subcategory='New 1')
+    except News_Article.DoesNotExist:
+        section_new1_page = None  # Handle case where article is not found
 
-    context = {'username': user.username, 'featured_article': featured_article}
+    context = {'username': user.username, 'featured_article': featured_article, 'section_new1_page': section_new1_page}
     return render(request, 'homepage.html', context)
 def SignupPage(request):
     if request.method=='POST':
