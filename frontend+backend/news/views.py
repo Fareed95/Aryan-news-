@@ -11,17 +11,15 @@ def pre_login_homepage(request):
 @login_required(login_url='login')
 def HomePage(request):
     user = request.user
-    # Pass the username to the template context
-    articlles = News_Article.objects.all()
     
-    allarticle = []
-    catarticle= News_Article.objects.values('article_category','article_subcategory', 'id')
-    cats= {item["article_category"] for item in catarticle}
-    subcats= {item["article_subcategory"] for item in catarticle}
-    print(f"checking 1 : {catarticle}, checking2 = {cats} , checking3 = {subcats}")
-    context = {'username': user.username}
-    return render(request, 'homepage.html', context)
+    # Retrieve the specific article based on subcategory
+    try:
+        featured_article = News_Article.objects.get(article_subcategory='HOME_MAIN_PAGE_DISPLAY')
+    except News_Article.DoesNotExist:
+        featured_article = None  # Handle case where article is not found
 
+    context = {'username': user.username, 'featured_article': featured_article}
+    return render(request, 'homepage.html', context)
 def SignupPage(request):
     if request.method=='POST':
         uname=request.POST.get('username')

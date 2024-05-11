@@ -101,24 +101,31 @@
           <article class="wrapper grid">
 
             <article class="hero-main" style="display: flex;">
-              <section class="doing-flex-para-read-h1-image">
-                <section class="feature">
-                  <a href="https://www.youtube.com/">
-                    <img src="{%static "images/feature-desktop.jpg"%}" alt="colorful blocks" class="img_feature__hero">
-                </a>            
+                {% if featured_article %}
+                <section class="doing-flex-para-read-h1-image">
+                    <section class="feature">
+                        <a href="#">
+                            <!-- Display the image of the featured article -->
+                            {% if featured_article.article_image1 %}
+                                <img src="{{ featured_article.article_image1.url }}" alt="{{ featured_article.article_name }}" class="img_feature__hero">
+                            {% endif %}
+                        </a>
+                        <article class="new-sec-para-img">
+                            <section class="feature-para-head">
+                                <h1 class="feature__headline">{{ featured_article.article_heading }}</h1>
+                            </section>
+                            <section class="para-anchor-read-more">
+                                <!-- Display the description of the featured article -->
+                                <p class="feature__description">{{ featured_article.article_desc|truncatewords:20 }}</p>
+                                <a href="#" class="read-more">READ MORE</a>
+                            </section>
+                        </article>
+                    </section>
                 </section>
-                <article class="new-sec-para-img">
-                  <section class="feature-para-head">
-                    <h1 class="feature__headline">The Bright Future of Web 3.0?</h1>
-                  </section>
-                  <section class="para-anchor-read-more">
-                    <p class="feature__description">We dive into the next evolution of the web that claims to put the power
-                      of the
-                      platforms back into the hands of the people. But is it really fulfilling its promise?</p>
-                    <a href="/" class="read-more">READ MORE</a>
-                  </section>
-                </article>
-              </section>
+            {% else %}
+                <!-- Handle case where no featured article is found -->
+                <p>No featured article found.</p>
+            {% endif %}
 
               <section class="new">
                 <h2>New</h2>
