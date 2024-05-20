@@ -531,3 +531,50 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.new-nav {
+  height: 3rem;
+  background-color: var(--c-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.7rem;
+  padding: 0;
+}
+
+.nav_linkss {
+  font-size: 0.7rem;
+  font-weight: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.nav_linkss:hover {
+  color: var(--c-yellow);
+}
