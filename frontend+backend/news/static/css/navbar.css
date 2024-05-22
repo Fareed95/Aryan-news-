@@ -29,21 +29,18 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", 'sans-serif';
   min-height: 100vh;
   line-height: 1.7;
+  width: min(69.375rem, calc(100% - 1.5rem));
+  margin-inline: auto;
 }
 
-h1,
-h2,
-h3 {
+h1,h2,h3 {
   line-height: 1.1;
 }
 
-h1,
-h2,
-h3,
-p {
+h1,h2,h3,p {
   margin-top: 0;
 }
 
@@ -57,8 +54,7 @@ li {
 }
 
 .wrapper {
-  width: min(69.375rem, calc(100% - 1.5rem));
-  margin-inline: auto;
+  margin-top: 1rem;
 }
 
 h1 {
@@ -99,15 +95,17 @@ ul {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-inline: var(--padding-inline-section);
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .flex {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .hover-link {
@@ -156,133 +154,197 @@ img {
 }
 
 /* weather */
-#top-banner img {
-  height: 1rem;
-  margin-right: 1rem;
-  padding-top: 0.5rem;
-}
-
 /* top banner social media */
 #top-banner {
-  height:auto;
-  background-color: var(--primary-text-color);
-  color: var(--accent-color);
-  font-size: large;
+  position: relative;
+  height: 1.5rem;
+  background-color: var(--c-white);
+  color: var(--c-blue);
+  font-size: 0.8rem;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+  padding: 1rem 1rem 0.5rem 1rem;
 }
-
+#top-banner img {
+  height: 1rem;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+}
+#weather-info {
+  position: relative;
+  width: 40rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#weather-info span {
+  display: inline-block;
+}
 #social-icons {
+  width: 20rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-
 #social-icons i {
-  font-size: 20px;
+  font-size: small;
   margin-right: 10px;
   color: var(--c-yellow);
-  background-color: var(--hover-color);
-  margin-right: 1.5rem;
+  background-color: var(--c-blue);
   transition: transform 0.3s;
   transform-style: preserve-3d;
   display: inline-block;
   padding: 3px 5px;
   border-radius: 20%;
-  align-items: center;
-  background-color: var(--c-blue);
 }
-
 #social-icons:hover {
   cursor: pointer;
 }
-
 #social-icons i:hover {
   transform: rotateX(360deg);
   color: var(--c-white);
 }
 
 /*  */
-.main_nav {
-  color: var(--c-blue);
-  font-size: 1.12rem;
-  line-height: 1.3;
+ 
+/* NAV */
+.main-nav {
+  height: 3rem;
+  background-color: var(--c-white);
+  margin: 10px 10px 10px 50px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
-.header__logo a img{
-  margin: 0;
+
+.company-logo img {
+  height: 2rem;
+  width: 4rem;
 }
 
 .nav-links {
+  width: 450px;
+  position: relative;
+}
+
+.nav-links ul {
   display: flex;
-  align-items: center;
-  padding-right: 1rem;
+  font-size: small;
 }
 
-.nav-links a {
-  margin-left: 2.5rem;
-  font-size: 0.8rem;
+.nav-links {
+  position: relative;
 }
 
-.nav-links a:hover {
-  color: var(--c-yellow);
+.search-form {
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 1; /* Ensure the search form is on top */
+  width: max-content;
 }
 
-.new-nav {
-  height: 3rem;
+.search-input {
+  height: 2rem;
+  width: 500px; /* Adjust the width as needed */
+  padding: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  border: 0;
+  font-size: larger;
+  border: 1px solid var(--c-yellow); /* Align vertically in the middle */
+  margin-left: 5rem;
+}
+.search_button_0nclick{
+border: none;
+display: inline-block;
+  background-color: var(--c-red);
+  color: var(--c-white);
+  font-size: 0.875rem;
+  letter-spacing: 0.31em;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.75rem 0.5rem;
+  margin-left: 0.5rem;
+}
+.search-btn, .close-btn {
+  height: 2rem;
+  cursor: pointer;
+  vertical-align: middle; /* Align vertically in the middle */
+}
+
+.close-btn{
+  margin-left: 10rem;
+  background-color: var(--c-silver);
+  color: var(--c-white);
+  font-size: 0.875rem;
+  letter-spacing: 0.31em;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+
+}
+
+.nav-blur {
+  backdrop-filter: blur(5px); /* Use backdrop-filter to blur only the background */
+}
+/* Sub Nav */
+.menu-bar {
   background-color: var(--c-blue);
+  color: var(--c-white);
+  height: 3rem;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  font-size: 0.7rem;
+  position: relative;
+}
+.menu-bar ul {
+  list-style: none;
+  display: flex;
+  font-size: 0.6rem;
   padding: 0;
 }
-
-.nav_linkss {
+.menu-bar ul li {
+  padding: 10px;
+  position: relative;
+}
+.menu-bar ul li a {
   font-size: 0.7rem;
-  font-weight: 1000;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.menu-bar ul li a:hover {
+  color: var(--color-primary);
+}
+.fas {
+  float: right;
+  margin-left: 10px;
+  padding-top: 3px;
+}
+
+
+/* Hero Section */
+.hero-main{
+  margin-top: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.nav_linkss:hover {
-  color: var(--c-yellow);
-}
-
-.feature {
-  width: 728px;
-  height: 300;
 }
 
 .img_feature__hero {
   opacity: 1;
-  transition: zoom-in 0.5s ease;
-  transition: transform 0.3s;
+  width: 728px;
+  height: 300px;
+  margin: 0;
 }
 
 .img_feature__hero:hover {
   cursor: pointer;
-  opacity: 0.7;
-  transform: scale(0.97);
-}
-
-.feature__headline {
-  font-size: var(--f-xl);
-  font-weight: 800;
-}
-
-.main-div-hero-section {
-  display: flex;
+  opacity: 0.98;
 }
 
 .feature__headline {
@@ -292,7 +354,6 @@ img {
 }
 
 .feature__description {
-  margin-block-end: 1.875rem;
   width: 22.5rem;
   margin-left: 3rem;
   color: var(--c-gray);
@@ -313,18 +374,17 @@ img {
 .read-more:hover {
   background: var(--c-blue);
 }
-
 .new-sec-para-img {
   display: flex;
   margin-top: 0.5rem;
 }
-
-.doing-flex-para-read-h1-image {}
-
+/* <!-- NEw Side HEro Section --> */
 /*  */
 .new {
+  display: block;
+  position: relative;
   margin-left: 2rem;
-  width: 20.5rem;
+  width: 22rem;
   height: 33.2rem;
   background: var(--c-blue);
 }
@@ -338,25 +398,86 @@ img {
 
 .new__post {
   color: var(--c-white);
+  margin: 1.5rem 0rem;
   margin-left: 1rem;
-  margin-bottom: 2rem;
-  border-block-end: 1px solid var(--c-gray);
 }
-
+.new__headline{
+  width: 20rem;
+}
 .new__headline a{
   color: var(--c-white);
   font-size: 1.3rem;
 }
 
-.new__headline:hover {
+.new__headline a:hover {
   cursor: pointer;
-  color: var(--c-yellow);
+  color: var(--c-red);
 }
 
 .new__description {
   color: var(--c-silver);
   font-size: 1rem;
   width: 17rem;
+}
+
+.new__description:hover {
+  cursor: pointer;
+  color: var(--c-white);
+}
+
+
+/* Small News Section constantly moving upwards */
+.column {
+  display: flex;
+}
+
+.new__horizontal__slider {
+  display: flex;
+  margin: 1rem 0rem;
+  overflow: hidden; /* Hide overflow to prevent content from showing outside the slider */
+  height: calc(4rem * 7);
+  border: 1px solid black; /* Set the height to accommodate all news articles */
+}
+
+/* Keyframes for the animation */
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-7rem * 8)); /* Move the total height of all news articles */
+  }
+}
+
+.column__news {
+  display: block;
+  animation: moveUp 30s linear infinite; /* Use a longer duration for slower movement */
+}
+
+.column__news hr {
+  width: 90%;
+  color: var(--c-silver);
+  opacity: 0.9;
+}
+
+.column_first_news {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+
+.column_first_news img {
+  width: 6rem;
+  height: 3.5rem;
+}
+
+.column_first_news p {
+  width: 15rem;
+  height: 3.5rem;
+  margin: 0;
+  margin-left: 1rem;
+  overflow: hidden;
+  font-size: 0.8rem;
+  font-weight: 100;
 }
 
 /* 

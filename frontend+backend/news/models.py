@@ -13,6 +13,7 @@ class News_Article(models.Model) :
     article_category = models.CharField(max_length=50,default="")
     article_subcategory = models.CharField(max_length = 50, default = "")
     article_published_by = models.CharField( max_length=150)
+    article_main_image = models.ImageField(upload_to="news/images",default="")
     article_image1 = models.ImageField(upload_to="news/images",default="",null=True, blank=True)
     article_image2 = models.ImageField(upload_to="news/images",default="",null=True, blank=True)
     article_image3 = models.ImageField(upload_to="news/images",default="",null=True, blank=True)
