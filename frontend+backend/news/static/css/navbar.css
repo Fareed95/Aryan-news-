@@ -962,3 +962,47 @@ footer {
     margin: 4px;
   }
 }
+
+.col-md-3
+          {
+          display: inline-block;
+          margin-left:-4px;
+          }
+
+          .carousel-indicators .active {
+          background-color: orange;
+            }
+
+          .col-md-3 img{
+
+          height: 200px;
+          }
+
+          body .carousel-indicator li{
+          background-color: blue;
+          }
+
+          body .carousel-indicators{
+          bottom: -50px;
+          }
+          .carousel-control-prev-icon,
+          .carousel-control-next-icon {
+              background-color: blue; /* Adjust color as needed */
+          }
+          
+          .carousel-control-prev,
+          .carousel-control-next {
+              top: auto;
+              bottom: auto;
+              padding-top: 222px;
+              position: absolute;
+              width: 5%; /* Adjust width for better positioning */
+          }
+          
+          .carousel-control-prev {
+              left: 0;
+          }
+          
+          .carousel-control-next {
+              right: 0;
+          }

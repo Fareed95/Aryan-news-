@@ -97,7 +97,7 @@
                 </section>
                 <section class="para-anchor-read-more">
                     <!-- Display the description of the featured article -->
-                    <p class="feature__description">{{ featured_article.article_desc|truncatewords:20 }}</p>
+                    <p class="feature__description">{{ featured_article.article_desc|truncatewords:40 }}</p>
                     <a href="#" class="read-more">READ MORE</a>
                 </section>
             </article>
@@ -363,287 +363,64 @@
   </section>
 </section>
 <span class="divider__line"></span>
+<div class="container">
 
-
-
-{% for article, range, nSlides in allProds %}
-<h2 class="my-4"> {{article.0.article_category}} </h2>
+    <!--Slideshow starts here -->
+    {% for product, range, nSlides in allProds %}
+<h2 class="my-4">{{product.0.article_category}}</h2>
 <div class="row">
-<div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
-<ul class="carousel-indicators">
-  <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+    <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+            {% for i in range %}
+            <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+            
+            {% endfor %}
+        </ul>
 
-   {% for i in range %}
-  <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
-  {% endfor %}
-</ul>
-
-
-<div class="container carousel-inner no-padding">
-
-  <div class="carousel-item active">
-
-
-    {% for i in article %}
-    <div class="col-xs-3 col-sm-3 col-md-3" >
-      <a href="#">
-      <div class="card"  style="width: 18rem;" >
-        <img src='/media/{{i.article_main_image}}'  class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{i.article_name|truncatewords:2}}</h5>
-          <p class="card-text">{{i.article_desc|truncatewords:10}}</p>
-          {% comment %} <form method="post" action="{% url 'add_to_cart' i.id %}"> {% endcomment %}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary cart">SAVE</button>
-        </form>
+        <!-- Carousel Inner -->
+        <div class="container carousel-inner no-padding">
+            <div class="carousel-item active">
+                {% for i in product %}
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <a href="/shop/products/{{i.id}}">
+                        <div class="card" style="width: 18rem;">
+                            <img src='/media/{{i.article_main_image}}' class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" style = "color :black ; font-weight : 700; ">{{i.article_name|truncatewords:3}}</h5>
+                                <p style = "font-size: small; color : black;" class="card-text">{{i.article_desc|truncatewords:10}}</p>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button style = "background-color: coral;"type="submit" class="btn btn-primary cart">Add To Favs</button>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-      </div>
-    </a>
-    </div>
-    {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
-  </div><div class="carousel-item">
-    {% endif %}
 
-    {% endfor %}
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo{{forloop.counter}}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#demo{{forloop.counter}}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
+<span class="divider__line"></span>
+{% endfor %}
+
 </div>
-</div>
-    <!-- left and right controls for the slide -->
-    <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-        </div>
-    {% endfor %}
-      {% comment %} <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-    <span class="divider__line"></span>
-    <!-- Supreme  Court Section Ends -->
-
-    <!-- High  Court Section Starts -->
-    <h2 class="trending__headline">High Court</h2>
-    <div class="high__court">
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-    <span class="divider__line"></span>
-    <!-- high Court Ends -->
-
-    <!-- News Update Start -->
-    <h2 class="trending__headline">News Updates</h2>
-    <div class="high__court">
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-    <span class="divider__line"></span>
-    <!-- News Update End -->
-    <!-- Articles Start -->
-    <h2 class="trending__headline">Articles</h2>
-    <div class="supreme__court">
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-    <span class="divider__line"></span>
-    <!-- Articles End -->
-    <!-- Study the Law Start -->
-
-    <h2 class="trending__headline">Know the Law</h2>
-    <div class="high__court">
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-    <span class="divider__line"></span>
-    <!-- Study the law End -->
-
-    <!-- Videos Start -->
-    <h2 class="trending__headline">Videos</h2>
-    <div class="high__court">
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__3">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-    <span class="divider__line"></span>
-<!-- Videos End -->
-<!-- Saved Starts -->
-
-<h2 class="trending__headline">Saved</h2>
-    <div class="supreme__court">
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-      <div class="card__2">
-        <img src="images/img-1.jpg" alt="Slide 1">
-        <div class="card-content">
-          <h3>Card Title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <a href="#" class="button">Read More</a>
-        </div>
-      </div>
-
-    </div> {% endcomment %}
 
     <!-- footer Starts -->
 

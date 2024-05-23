@@ -12,43 +12,32 @@ def pre_login_homepage(request):
 @login_required(login_url='login')
 def HomePage(request):
     user = request.user
+
+    # Retrieve specific articles based on subcategory
+    featured_article = News_Article.objects.filter(article_subcategory='HOME_MAIN_PAGE_DISPLAY').first()
+    section_new1_page = News_Article.objects.filter(article_subcategory='New 1').first()
+    section_new2_page = News_Article.objects.filter(article_subcategory='New 2').first()
+    section_new3_page = News_Article.objects.filter(article_subcategory='New 3').first()
     
-    # Retrieve the specific article based on subcategory
-    try:
-        featured_article = News_Article.objects.get(article_subcategory='HOME_MAIN_PAGE_DISPLAY')
-    except News_Article.DoesNotExist:
-        featured_article = None  # Handle case where article is not found
-    try:
-        section_new1_page = News_Article.objects.get(article_subcategory='New 1')
-    except News_Article.DoesNotExist:
-        section_new1_page = None  # Handle case where article is not found
-    try:
-        section_new2_page = News_Article.objects.get(article_subcategory='New 2')
-    except News_Article.DoesNotExist:
-        section_new1_page = None  # Handle case where article is not found
-    try:
-        section_new3_page = News_Article.objects.get(article_subcategory='New 3')
-    except News_Article.DoesNotExist:
-        section_new1_page = None  # Handle case where article is not found
-    products= News_Article.objects.all()
-    
-    allProds=[]
-    catprods= News_Article.objects.values('article_category', 'id')
-    cats= {item["article_category"] for item in catprods}
+    products = News_Article.objects.all()
+
+    allProds = []
+    catprods = News_Article.objects.values('article_category', 'id')
+    cats = {item["article_category"] for item in catprods}
     for cat in cats:
-        prod=News_Article.objects.filter(article_category=cat)
+        prod = News_Article.objects.filter(article_category=cat)
         n = len(prod)
-        nSlides = n // 4 + ceil((n / 4) - (n // 4))          #no. of slides logic 
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))  # no. of slides logic
         allProds.append([prod, range(1, nSlides), nSlides])
 
     context = {
         'username': user.username,
         'featured_article': featured_article,
-        'section_new1_page': section_new1_page, 
+        'section_new1_page': section_new1_page,
         'section_new2_page': section_new2_page,
         'section_new3_page': section_new3_page,
-        'allProds':allProds,
-        }
+        'allProds': allProds,
+    }
     return render(request, 'homepage.html', context)
 def SignupPage(request):
     if request.method=='POST':
