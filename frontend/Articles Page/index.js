@@ -26,13 +26,21 @@ function updateBanner() {
                     // Update banner content with weather and air quality information
                     let banner = document.getElementById('weather-info');
                     banner.innerHTML = `${flag} ${date} ${time} Weather: ${weather}, Temperature: ${temperature}°C, Air Quality: ${airQualityCategory}`;
+
+                    // Add social media icons
+                    let socialIcons = document.getElementById('social-icons');
+                    socialIcons.innerHTML = `
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-linkedin"></i>
+                        <i class="fab fa-youtube"></i>
+                    `;
                 })
                 .catch(error => console.error('Error fetching air quality:', error));
         })
         .catch(error => console.error('Error fetching weather:', error));
 }
-
-// Function to get air quality category
 function getAirQualityCategory(index) {
     if (index <= 50) {
         return 'Good';
@@ -48,13 +56,29 @@ function getAirQualityCategory(index) {
         return 'Hazardous';
     }
 }
-
 // Call the updateBanner function to update content initially
 updateBanner();
 
 // Update content every second (1000 milliseconds)
 setInterval(updateBanner, 1000);
 
+// scroll in 40rem
+window.onload = function() {
+    var style = document.createElement('style');
+    var weatherInfo = document.querySelector('#weather-info');
+    var weatherSpan = weatherInfo.querySelector('span');
+    var weatherInfoWidth = weatherInfo.offsetWidth;
+    var spanWidth = weatherSpan.offsetWidth;
+
+    style.innerHTML = `
+        @keyframes scroll {
+            0% { transform: translateX(${weatherInfoWidth}px); }
+            100% { transform: translateX(-${spanWidth}px); }
+        }
+    `;
+    document.head.append(style);
+
+    weatherSpan.style.animation = ' 20s linear infinite';}
 
 // NAvbar search bar
 document.querySelector('.search-icon').addEventListener('click', function() {
@@ -65,15 +89,4 @@ document.querySelector('.search-icon').addEventListener('click', function() {
   document.querySelector('.close-btn').addEventListener('click', function() {
     document.querySelector('.main-nav').classList.remove('nav-blur');
     document.querySelector('.search-form').style.display = 'none';
-  });
-
-
-// making background color change on Scroll
-window.addEventListener('scroll', function() {
-    var navbar = document.getElementById('navbar');
-    if (window.scrollY > 100) {
-      navbar.classList.add('sticky');
-    } else {
-      navbar.classList.remove('sticky');
-    }
   });
